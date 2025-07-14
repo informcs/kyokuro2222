@@ -19,10 +19,82 @@
             overflow-x: hidden;
         }
 
+        /* Stars Background */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Shooting Stars */
+        .shooting-star {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: #00ffff;
+            border-radius: 50%;
+            box-shadow: 0 0 6px #00ffff;
+            animation: shoot 3s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(-100px) translateY(-100px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(100vw) translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+            z-index: 2;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
 
         /* Header */
@@ -141,6 +213,7 @@
         .services {
             padding: 5rem 0;
             background: #0f0f0f;
+            position: relative;
         }
 
         .section-title {
@@ -318,7 +391,8 @@
         }
 
         .form-group input,
-        .form-group textarea {
+        .form-group textarea,
+        .form-group select {
             width: 100%;
             padding: 0.8rem;
             border: 1px solid #00ffff;
@@ -330,7 +404,8 @@
         }
 
         .form-group input:focus,
-        .form-group textarea:focus {
+        .form-group textarea:focus,
+        .form-group select:focus {
             outline: none;
             border-color: #ff00ff;
             box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
@@ -360,6 +435,33 @@
             transform: translateY(-2px);
         }
 
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #00ffff;
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid #00ffff;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            z-index: 2000;
+            display: none;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: popIn 0.5s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
         /* Footer */
         footer {
             background: #000;
@@ -387,6 +489,9 @@
     </style>
 </head>
 <body>
+    <!-- Stars Background -->
+    <div class="stars" id="stars"></div>
+
     <header>
         <nav class="container">
             <a href="#" class="logo">⚡ Kyokuro222</a>
@@ -537,7 +642,7 @@
                     </div>
                     <div class="form-group">
                         <label for="project">ประเภทงาน</label>
-                        <select id="project" name="project" style="width: 100%; padding: 0.8rem; border: 1px solid #00ffff; border-radius: 5px; background: rgba(0, 0, 0, 0.7); color: white; font-size: 1rem;">
+                        <select id="project" name="project" required>
                             <option value="">เลือกประเภทงาน</option>
                             <option value="web">เว็บไซต์/เว็บแอป</option>
                             <option value="app">แอปพลิเคชัน</option>
@@ -556,6 +661,12 @@
         </div>
     </section>
 
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <h3>🚀 ส่งข้อความสำเร็จแล้ว!</h3>
+        <p>ขอบคุณที่ติดต่อเรา เราจะตอบกลับเร็วๆ นี้ 😊</p>
+    </div>
+
     <footer>
         <div class="container">
             <p>&copy; 2024 Kyokuro222. Crafting digital experiences with neon soul 🌟⚡</p>
@@ -563,40 +674,203 @@
     </footer>
 
     <script>
-        // Smooth scrolling
+        // Create stars background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const starCount = 150;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Create shooting stars
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.left = Math.random() * 100 + '%';
+            shootingStar.style.top = Math.random() * 100 + '%';
+            shootingStar.style.animationDuration = (Math.random() * 2 + 1) + 's';
+            document.body.appendChild(shootingStar);
+            
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 3000);
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const particleCount = 20;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                document.body.appendChild(particle);
+            }
+        }
+
+        // Initialize space effects
+        createStars();
+        createParticles();
+        
+        // Create shooting stars periodically
+        setInterval(createShootingStar, 2000);
+
+        // Smooth scrolling with particle effects
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
+                
+                // Create particles when navigating
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        const particle = document.createElement('div');
+                        particle.className = 'particle';
+                        particle.style.left = Math.random() * 100 + '%';
+                        particle.style.top = Math.random() * 100 + '%';
+                        particle.style.animationDuration = '1s';
+                        document.body.appendChild(particle);
+                        
+                        setTimeout(() => particle.remove(), 1000);
+                    }, i * 100);
+                }
+                
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
             });
         });
 
-        // Form submission
+        // Form submission with EmailJS
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Get form data
             const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                project: formData.get('project'),
+                message: formData.get('message')
+            };
             
-            // Simulate form submission
-            alert('ขอบคุณสำหรับข้อความ! เราจะติดต่อกลับเร็วๆ นี้ 😊');
+            // Create mailto link
+            const subject = encodeURIComponent(`งาน${data.project} - ${data.name}`);
+            const body = encodeURIComponent(`
+ชื่อ: ${data.name}
+อีเมล: ${data.email}
+ประเภทงาน: ${data.project}
+
+รายละเอียด:
+${data.message}
+            `);
+            
+            const mailtoLink = `mailto:genshinxd1138@gmail.com?subject=${subject}&body=${body}`;
+            
+            // Open email client
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            // Create celebration particles
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDuration = '2s';
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => particle.remove(), 2000);
+                }, i * 100);
+            }
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
             
             // Reset form
             this.reset();
         });
 
-        // Add some interactive effects
+        // Add interactive effects to skill items
         const skillItems = document.querySelectorAll('.skill-item');
         skillItems.forEach(item => {
             item.addEventListener('mouseenter', function() {
                 this.style.transform = 'scale(1.05)';
+                
+                // Create hover particles
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = '1s';
+                document.body.appendChild(particle);
+                
+                setTimeout(() => particle.remove(), 1000);
             });
             
             item.addEventListener('mouseleave', function() {
                 this.style.transform = 'scale(1)';
+            });
+        });
+
+        // Add scroll effects
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.stars');
+            const speed = scrolled * 0.5;
+            
+            parallax.style.transform = `translateY(${speed}px)`;
+        });
+
+        // Add service card hover effects
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                // Create sparkle effect
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        const sparkle = document.createElement('div');
+                        sparkle.className = 'particle';
+                        sparkle.style.left = Math.random() * 100 + '%';
+                        sparkle.style.top = Math.random() * 100 + '%';
+                        sparkle.style.animationDuration = '0.8s';
+                        document.body.appendChild(sparkle);
+                        
+                        setTimeout(() => sparkle.remove(), 800);
+                    }, i * 100);
+                }
+            });
+        });
+
+        // Add portfolio item hover effects
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+        portfolioItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                // Create orbital effect
+                const orbital = document.createElement('div');
+                orbital.className = 'particle';
+                orbital.style.left = '50%';
+                orbital.style.top = '50%';
+                orbital.style.animationDuration = '2s';
+                this.appendChild(orbital);
+                
+                setTimeout(() => orbital.remove(), 2000);
             });
         });
     </script>
