@@ -3,495 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>รับจ้างเขียนโปรแกรม & เกม | Developer Portfolio</title>
+    <title>Kyokuro222 | รับจ้างเขียนโปรแกรม & เกม</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary: #00fff7;
+            --secondary: #ff00ea;
+            --dark: #0a0a0a;
+            --card: #181824cc;
+            --glass: rgba(30, 30, 40, 0.65);
+            --border: #00fff799;
+            --radius: 18px;
         }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            font-family: 'Arial', sans-serif;
-            background: #0a0a0a;
+            font-family: 'Kanit', 'Roboto', Arial, sans-serif;
+            background: linear-gradient(120deg, #0a0a2f 0%, #1a0022 100%);
+            min-height: 100vh;
             color: #fff;
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
         }
-
-        /* Stars Background */
-        .stars {
+        /* Neon animated background */
+        body::before {
+            content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(circle at 20% 30%, #00fff766 0%, transparent 70%),
+                        radial-gradient(circle at 80% 60%, #ff00ea66 0%, transparent 70%);
+            filter: blur(80px);
             pointer-events: none;
-            z-index: 1;
         }
 
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 2s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-
-        /* Shooting Stars */
-        .shooting-star {
-            position: fixed;
-            width: 2px;
-            height: 2px;
-            background: #00ffff;
-            border-radius: 50%;
-            box-shadow: 0 0 6px #00ffff;
-            animation: shoot 3s linear infinite;
-            z-index: 2;
-        }
-
-        @keyframes shoot {
-            0% {
-                transform: translateX(-100px) translateY(-100px);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateX(100vw) translateY(100vh);
-                opacity: 0;
-            }
-        }
-
-        /* Floating Particles */
-        .particle {
-            position: fixed;
-            width: 4px;
-            height: 4px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-            z-index: 2;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 10;
-        }
-
-        /* Header */
         header {
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(10px);
-            position: fixed;
+            position: sticky;
             top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            z-index: 100;
+            background: var(--glass);
+            backdrop-filter: blur(14px);
+            border-bottom: 1.5px solid var(--border);
+            box-shadow: 0 4px 32px #00fff711;
         }
-
-        nav {
+        nav.container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            padding: 1.25rem 0;
         }
-
         .logo {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: bold;
-            color: #00ffff;
+            color: var(--primary);
+            letter-spacing: 1px;
             text-decoration: none;
-            text-shadow: 0 0 10px #00ffff;
+            text-shadow: 0 0 18px var(--primary), 0 0 2px #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
-
         .nav-links {
             display: flex;
-            list-style: none;
             gap: 2rem;
+            list-style: none;
         }
-
         .nav-links a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            transition: color 0.3s;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.25s;
+            padding: 6px 14px;
+            border-radius: 8px;
         }
-
         .nav-links a:hover {
-            color: #ff00ff;
-            text-shadow: 0 0 5px #ff00ff;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: #000;
+            box-shadow: 0 0 12px var(--primary);
         }
-
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 3;
+        }
         /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 90vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            position: relative;
             text-align: center;
-            color: white;
-            position: relative;
-            background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #0a0a0a 100%);
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                linear-gradient(45deg, transparent 30%, rgba(0, 255, 255, 0.1) 50%, transparent 70%),
-                linear-gradient(-45deg, transparent 30%, rgba(255, 0, 255, 0.1) 50%, transparent 70%);
-            animation: neonFlow 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes neonFlow {
-            0% { opacity: 0.5; transform: translateX(-50px); }
-            100% { opacity: 1; transform: translateX(50px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
+            color: var(--primary);
+            text-shadow: 0 0 24px var(--primary);
             margin-bottom: 1rem;
-            text-shadow: 0 0 20px #00ffff;
-            color: #00ffff;
         }
-
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: #e0e0e0;
+            text-shadow: 0 0 10px #1a1a2e55;
         }
-
         .cta-button {
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: #000;
-            padding: 1rem 2rem;
             border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            outline: none;
+            font-size: 1.2rem;
             font-weight: bold;
+            padding: 1rem 3rem;
+            border-radius: 100px;
             cursor: pointer;
+            box-shadow: 0 0 40px var(--primary);
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
         }
-
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            color: #fff;
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 0 60px var(--secondary);
         }
-
-        /* Services Section */
-        .services {
-            padding: 5rem 0;
-            background: #0f0f0f;
-            position: relative;
-        }
-
+        /* Section Titles */
         .section-title {
+            font-size: 2.4rem;
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #00ffff;
-            text-shadow: 0 0 10px #00ffff;
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+            text-shadow: 0 0 10px var(--primary);
+            font-weight: 700;
         }
-
+        /* Services */
+        .services {
+            padding: 5rem 0 1rem 0;
+        }
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
-
         .service-card {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 0 20px #00fff722;
             padding: 2rem;
-            border-radius: 15px;
             text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
         }
-
         .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.4);
-            border-color: #ff00ff;
+            transform: translateY(-8px) scale(1.03) rotate(-1deg);
+            box-shadow: 0 0 32px var(--secondary);
+            border-color: var(--secondary);
         }
-
         .service-icon {
-            font-size: 3rem;
+            font-size: 2.8rem;
             margin-bottom: 1rem;
+            filter: drop-shadow(0 0 8px #fff);
         }
-
         .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.35rem;
             color: #fff;
+            margin-bottom: 0.8rem;
         }
-
-        /* Skills Section */
+        .service-card p {
+            color: #d2d2d2;
+        }
+        /* Skills */
         .skills {
-            padding: 5rem 0;
-            background: #0a0a0a;
-            color: white;
+            padding: 5rem 0 1rem 0;
+            background: #11122699;
         }
-
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
         }
-
         .skill-item {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 1.5rem;
-            border-radius: 10px;
+            background: var(--glass);
+            border: 1.5px solid var(--primary);
+            border-radius: 12px;
+            padding: 1.5rem 1.2rem;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
-            transition: all 0.3s;
+            box-shadow: 0 0 14px #00fff744;
+            transition: all 0.23s;
         }
-
         .skill-item:hover {
-            border-color: #ff00ff;
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.5);
+            border-color: var(--secondary);
+            box-shadow: 0 0 22px var(--secondary);
+            transform: scale(1.07);
         }
-
         .skill-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 2.2rem;
+            margin-bottom: 0.7rem;
         }
-
-        /* Portfolio Section */
+        /* Portfolio */
         .portfolio {
-            padding: 5rem 0;
-            background: #0f0f0f;
+            padding: 5rem 0 1.5rem 0;
         }
-
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
-
         .portfolio-item {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            border-radius: 15px;
+            background: var(--card);
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: 0 0 12px #00fff722;
             overflow: hidden;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-            transition: transform 0.3s;
-            border: 1px solid #00ffff;
+            transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+            position: relative;
         }
-
         .portfolio-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
-            border-color: #ff00ff;
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 0 40px var(--secondary);
+            border-color: var(--secondary);
         }
-
         .portfolio-image {
-            height: 200px;
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: #000;
         }
-
         .portfolio-content {
-            padding: 1.5rem;
+            padding: 1.2rem 1.5rem;
         }
-
         .portfolio-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #00ffff;
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 0.4rem;
         }
-
         .portfolio-content p {
-            color: #ccc;
-            margin-bottom: 1rem;
+            color: #ccf3ff;
+            margin-bottom: 0.7rem;
         }
-
         .tech-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
         }
-
         .tech-tag {
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: #000;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
+            padding: 0.26rem 0.9rem;
+            border-radius: 16px;
+            font-size: 0.88rem;
+            font-weight: 600;
         }
-
-        /* Contact Section */
+        /* Contact */
         .contact {
-            padding: 5rem 0;
-            background: #0a0a0a;
-            color: white;
+            padding: 5rem 0 3rem 0;
+            background: #10101aee;
         }
-
         .contact-form {
-            max-width: 600px;
+            max-width: 520px;
             margin: 0 auto;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            background: var(--glass);
+            padding: 2.5rem 2rem 2rem 2rem;
+            border-radius: var(--radius);
+            border: 1.5px solid var(--primary);
+            box-shadow: 0 0 22px #00fff744;
         }
-
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.4rem;
         }
-
         .form-group label {
-            display: block;
+            color: var(--primary);
+            font-weight: bold;
             margin-bottom: 0.5rem;
-            color: #00ffff;
-            text-shadow: 0 0 5px #00ffff;
+            display: block;
         }
-
         .form-group input,
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #00ffff;
-            border-radius: 5px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
+            padding: 0.89rem;
+            margin-top: 0.4rem;
+            border: 1.3px solid var(--primary);
+            border-radius: 6px;
+            background: #181824dd;
+            color: #fff;
             font-size: 1rem;
-            transition: all 0.3s;
+            font-family: inherit;
+            transition: border 0.2s, box-shadow 0.2s;
         }
-
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #ff00ff;
-            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+            border-color: var(--secondary);
+            box-shadow: 0 0 8px var(--secondary);
         }
-
         .form-group input::placeholder,
         .form-group textarea::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+            color: #cbefff88;
         }
-
         .submit-btn {
-            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             color: #000;
             padding: 1rem 2rem;
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+            border-radius: 7px;
+            font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
             width: 100%;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            box-shadow: 0 0 16px var(--primary);
+            transition: all 0.3s;
         }
-
         .submit-btn:hover {
-            box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
-            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--secondary);
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            color: #fff;
         }
-
         /* Success Message */
         .success-message {
+            display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #00ffff;
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid #00ffff;
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+            color: var(--primary);
+            padding: 2.2rem 2.5rem;
+            border-radius: 18px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 33px var(--primary);
             z-index: 2000;
-            display: none;
             text-align: center;
-        }
-
-        .success-message.show {
-            display: block;
+            font-size: 1.25rem;
             animation: popIn 0.5s ease-out;
         }
-
+        .success-message.show { display: block; }
         @keyframes popIn {
-            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            0% { transform: translate(-50%, -50%) scale(0.7); opacity: 0; }
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
-
         /* Footer */
         footer {
             background: #000;
-            color: white;
+            color: #fff;
             text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid #00ffff;
+            padding: 2rem 0 1rem 0;
+            border-top: 1.5px solid var(--border);
         }
-
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .services-grid,
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 900px) {
+            .services-grid, .skills-grid, .portfolio-grid { grid-template-columns: 1fr; }
+            .container { width: 98%; }
+        }
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 1.7rem; }
+            .container { width: 99%; }
         }
     </style>
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 </head>
 <body>
-    <!-- Stars Background -->
-    <div class="stars" id="stars"></div>
-
     <header>
         <nav class="container">
             <a href="#" class="logo">⚡ Kyokuro222</a>
@@ -506,11 +389,9 @@
     </header>
 
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>รับจ้างเขียนโปรแกรม & เกม</h1>
-            <p>พัฒนาแอปพลิเคชัน เว็บไซต์ และเกมคุณภาพสูง<br>ด้วยเทคโนโลยีล่าสุด</p>
-            <a href="#contact" class="cta-button">ติดต่อเลย</a>
-        </div>
+        <h1>รับจ้างเขียนโปรแกรม & เกม</h1>
+        <p>พัฒนาแอป เว็บไซต์ และเกมคุณภาพสูง<br>ด้วยเทคโนโลยีล่าสุด พร้อมออกแบบ UI/UX โดดเด่น</p>
+        <a href="#contact" class="cta-button">ติดต่อเลย</a>
     </section>
 
     <section class="services" id="services">
@@ -520,22 +401,22 @@
                 <div class="service-card">
                     <div class="service-icon">🌐</div>
                     <h3>เว็บแอปพลิเคชัน</h3>
-                    <p>พัฒนาเว็บไซต์และเว็บแอปพลิเคชันที่ทันสมัย รองรับทุกอุปกรณ์ ใช้งานง่าย</p>
+                    <p>เว็บไซต์ธุรกิจ, web portal, ร้านค้าออนไลน์, ระบบจอง ฯลฯ</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📱</div>
                     <h3>แอปพลิเคชัน</h3>
-                    <p>สร้างแอปพลิเคชันสำหรับธุรกิจ ระบบจัดการ และเครื่องมือต่างๆ</p>
+                    <p>Mobile app, Desktop app, Backend API, ระบบจัดการต่างๆ</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🎮</div>
-                    <h3>เกม</h3>
-                    <p>พัฒนาเกมคุณภาพสูง ทั้งแบบ 2D และ 3D สำหรับทุกแพลตฟอร์ม</p>
+                    <h3>เกม 2D/3D</h3>
+                    <p>Game Dev, โปรเจกต์จบ, เกมมือถือ, Game Jam, Unity, Unreal ฯลฯ</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🤖</div>
-                    <h3>ระบบอัตโนมัติ</h3>
-                    <p>สร้างบอท สคริปต์ และระบบอัตโนมัติเพื่อเพิ่มประสิทธิภาพ</p>
+                    <h3>ระบบอัตโนมัติ / Bot</h3>
+                    <p>Line/Discord Bot, Automation Script, Web Scraper</p>
                 </div>
             </div>
         </div>
@@ -548,7 +429,7 @@
                 <div class="skill-item">
                     <div class="skill-icon">🟨</div>
                     <h3>JavaScript</h3>
-                    <p>Frontend & Backend</p>
+                    <p>Frontend / Backend</p>
                 </div>
                 <div class="skill-item">
                     <div class="skill-icon">🐍</div>
@@ -582,7 +463,7 @@
                     <div class="portfolio-image">🛒</div>
                     <div class="portfolio-content">
                         <h3>ระบบ E-commerce</h3>
-                        <p>เว็บไซต์ขายของออนไลน์ครบครัน พร้อมระบบการชำระเงินและจัดการสต็อก</p>
+                        <p>เว็บไซต์ขายของออนไลน์ครบครัน พร้อมระบบชำระเงิน</p>
                         <div class="tech-tags">
                             <span class="tech-tag">JavaScript</span>
                             <span class="tech-tag">Node.js</span>
@@ -594,7 +475,7 @@
                     <div class="portfolio-image">🎮</div>
                     <div class="portfolio-content">
                         <h3>เกม RPG 2D</h3>
-                        <p>เกมผจญภัยแฟนตาซี พร้อมระบบการต่อสู้ เควส และคาแรคเตอร์</p>
+                        <p>เกมผจญภัยแฟนตาซี พร้อมระบบต่อสู้/เควส/คาแรคเตอร์</p>
                         <div class="tech-tags">
                             <span class="tech-tag">C++</span>
                             <span class="tech-tag">Lua</span>
@@ -605,7 +486,7 @@
                     <div class="portfolio-image">📊</div>
                     <div class="portfolio-content">
                         <h3>ระบบจัดการข้อมูล</h3>
-                        <p>แดชบอร์ดสำหรับการจัดการข้อมูล พร้อมกราฟและรีพอร์ต</p>
+                        <p>แดชบอร์ดจัดการข้อมูล พร้อมกราฟและรีพอร์ต</p>
                         <div class="tech-tags">
                             <span class="tech-tag">Python</span>
                             <span class="tech-tag">JavaScript</span>
@@ -616,7 +497,7 @@
                     <div class="portfolio-image">🤖</div>
                     <div class="portfolio-content">
                         <h3>บอทอัตโนมัติ</h3>
-                        <p>บอทสำหรับการทำงานอัตโนมัติ ตอบข้อความ และจัดการงาน</p>
+                        <p>บอท Line/Discord ทำงานอัตโนมัติ หรืองานเฉพาะทาง</p>
                         <div class="tech-tags">
                             <span class="tech-tag">Python</span>
                             <span class="tech-tag">Node.js</span>
@@ -653,7 +534,7 @@
                     </div>
                     <div class="form-group">
                         <label for="message">รายละเอียด</label>
-                        <textarea id="message" name="message" rows="5" placeholder="อธิบายงานที่ต้องการ งบประมาณ และเวลา" required></textarea>
+                        <textarea id="message" name="message" rows="4" placeholder="อธิบายงานที่ต้องการ งบประมาณ และเวลา" required></textarea>
                     </div>
                     <button type="submit" class="submit-btn">ส่งข้อความ</button>
                 </form>
@@ -661,7 +542,6 @@
         </div>
     </section>
 
-    <!-- Success Message -->
     <div class="success-message" id="successMessage">
         <h3>🚀 ส่งข้อความสำเร็จแล้ว!</h3>
         <p>ขอบคุณที่ติดต่อเรา เราจะตอบกลับเร็วๆ นี้ 😊</p>
@@ -674,205 +554,31 @@
     </footer>
 
     <script>
-        // Create stars background
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            const starCount = 150;
-            
-            for (let i = 0; i < starCount; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 2 + 's';
-                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                starsContainer.appendChild(star);
-            }
-        }
+    // EmailJS Init (ใส่ Public Key ของคุณ)
+    emailjs.init('YOUR_PUBLIC_KEY'); // เปลี่ยนเป็น Public Key จาก EmailJS
 
-        // Create shooting stars
-        function createShootingStar() {
-            const shootingStar = document.createElement('div');
-            shootingStar.className = 'shooting-star';
-            shootingStar.style.left = Math.random() * 100 + '%';
-            shootingStar.style.top = Math.random() * 100 + '%';
-            shootingStar.style.animationDuration = (Math.random() * 2 + 1) + 's';
-            document.body.appendChild(shootingStar);
-            
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const successMsg = document.getElementById('successMessage');
+        const form = this;
+
+        // ส่งข้อมูลผ่าน EmailJS
+        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', { // เปลี่ยนเป็น Service ID, Template ID
+            name: form.name.value,
+            email: form.email.value,
+            project: form.project.value,
+            message: form.message.value
+        }).then(function(response) {
+            // แสดงข้อความสำเร็จ
+            successMsg.classList.add('show');
             setTimeout(() => {
-                shootingStar.remove();
-            }, 3000);
-        }
-
-        // Create floating particles
-        function createParticles() {
-            const particleCount = 20;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 6 + 's';
-                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-                document.body.appendChild(particle);
-            }
-        }
-
-        // Initialize space effects
-        createStars();
-        createParticles();
-        
-        // Create shooting stars periodically
-        setInterval(createShootingStar, 2000);
-
-        // Smooth scrolling with particle effects
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                // Create particles when navigating
-                for (let i = 0; i < 5; i++) {
-                    setTimeout(() => {
-                        const particle = document.createElement('div');
-                        particle.className = 'particle';
-                        particle.style.left = Math.random() * 100 + '%';
-                        particle.style.top = Math.random() * 100 + '%';
-                        particle.style.animationDuration = '1s';
-                        document.body.appendChild(particle);
-                        
-                        setTimeout(() => particle.remove(), 1000);
-                    }, i * 100);
-                }
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
+                successMsg.classList.remove('show');
+            }, 3500);
+            form.reset();
+        }, function(error) {
+            alert('ขออภัย ระบบขัดข้อง กรุณาลองใหม่หรือติดต่อทางอีเมล: genshinxd1138@gmail.com');
         });
-
-        // Form submission with EmailJS
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const data = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                project: formData.get('project'),
-                message: formData.get('message')
-            };
-            
-            // Create mailto link
-            const subject = encodeURIComponent(`งาน${data.project} - ${data.name}`);
-            const body = encodeURIComponent(`
-ชื่อ: ${data.name}
-อีเมล: ${data.email}
-ประเภทงาน: ${data.project}
-
-รายละเอียด:
-${data.message}
-            `);
-            
-            const mailtoLink = `mailto:genshinxd1138@gmail.com?subject=${subject}&body=${body}`;
-            
-            // Open email client
-            window.location.href = mailtoLink;
-            
-            // Show success message
-            const successMessage = document.getElementById('successMessage');
-            successMessage.classList.add('show');
-            
-            // Create celebration particles
-            for (let i = 0; i < 10; i++) {
-                setTimeout(() => {
-                    const particle = document.createElement('div');
-                    particle.className = 'particle';
-                    particle.style.left = Math.random() * 100 + '%';
-                    particle.style.top = Math.random() * 100 + '%';
-                    particle.style.animationDuration = '2s';
-                    document.body.appendChild(particle);
-                    
-                    setTimeout(() => particle.remove(), 2000);
-                }, i * 100);
-            }
-            
-            // Hide success message after 3 seconds
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
-            
-            // Reset form
-            this.reset();
-        });
-
-        // Add interactive effects to skill items
-        const skillItems = document.querySelectorAll('.skill-item');
-        skillItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.transform = 'scale(1.05)';
-                
-                // Create hover particles
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.animationDuration = '1s';
-                document.body.appendChild(particle);
-                
-                setTimeout(() => particle.remove(), 1000);
-            });
-            
-            item.addEventListener('mouseleave', function() {
-                this.style.transform = 'scale(1)';
-            });
-        });
-
-        // Add scroll effects
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.stars');
-            const speed = scrolled * 0.5;
-            
-            parallax.style.transform = `translateY(${speed}px)`;
-        });
-
-        // Add service card hover effects
-        const serviceCards = document.querySelectorAll('.service-card');
-        serviceCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                // Create sparkle effect
-                for (let i = 0; i < 3; i++) {
-                    setTimeout(() => {
-                        const sparkle = document.createElement('div');
-                        sparkle.className = 'particle';
-                        sparkle.style.left = Math.random() * 100 + '%';
-                        sparkle.style.top = Math.random() * 100 + '%';
-                        sparkle.style.animationDuration = '0.8s';
-                        document.body.appendChild(sparkle);
-                        
-                        setTimeout(() => sparkle.remove(), 800);
-                    }, i * 100);
-                }
-            });
-        });
-
-        // Add portfolio item hover effects
-        const portfolioItems = document.querySelectorAll('.portfolio-item');
-        portfolioItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                // Create orbital effect
-                const orbital = document.createElement('div');
-                orbital.className = 'particle';
-                orbital.style.left = '50%';
-                orbital.style.top = '50%';
-                orbital.style.animationDuration = '2s';
-                this.appendChild(orbital);
-                
-                setTimeout(() => orbital.remove(), 2000);
-            });
-        });
+    });
     </script>
 </body>
 </html>
